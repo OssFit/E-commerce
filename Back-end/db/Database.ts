@@ -1,4 +1,11 @@
+import { Connection } from "mongoose";
+
 const mongoose = require("mongoose");
+interface ConnectionData {
+  connection: {
+    host: string;
+  };
+}
 
 const ConnectDatabase = () => {
   mongoose
@@ -6,7 +13,7 @@ const ConnectDatabase = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then((data: { connection: { host: any; }; }) => {
+    .then((data:ConnectionData & Connection) => {
       console.log(`mongod connected with server: ${data.connection.host}`);
     });
 };
